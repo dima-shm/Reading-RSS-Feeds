@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ConsoleApp.Models
+namespace WebApp.Models
 {
     class Channel
     {
