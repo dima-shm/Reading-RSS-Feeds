@@ -3,7 +3,22 @@
 }
 
 <div class="container">
-    <h4 class="text-center">Articles list</h4>
+    <div class="row">
+        Источник ленты
+        <select id="channels" class="form-control">
+            <option value="Все">Все</option>
+        </select>
+    </div>
+    <br />
+    <div class="row">
+        <input type="radio" class="sort-by" name="sort-by" value="1" checked="checked"/> Сортировать по дате
+        <input type="radio" class="sort-by" name="sort-by" value="2" /> Сортировать по источнику
+    </div>
+    <br />
+    <div class="row">
+        <input type="submit" id="get-articles" value="Просмотреть" class="btn btn-primary">
+    </div>
+    <br />
     <div class="row">
         <table id="articles-list" class="table" style="max-width:50px">
             <thead>
@@ -21,35 +36,56 @@
 
 @section scripts{
     <script type="text/javascript">
-        var ArticlesList = [];
         $(function () {
-            getAllArticles();
+            getAllChannels();
+            $('#get-articles').bind('click', function () {
+                getArticles();
+            });
         });
-        function getAllArticles() {
+        function getAllChannels() {
             var requestParams = {
-                url: "http://localhost:54733/api/Articles",
+                url: "http://localhost:54733/api/Channels",
                 type: 'GET'
             };
             $.ajax(requestParams)
                 .done((res) => {
-                    ArticlesList = res;
-                    updateArticlesList(ArticlesList);
+                    initChannels(res);
                 })
                 .fail((jqXhr, textStatus, errorThrown) => {
                     showAlert('danger', errorThrown);
                 });
         }
-        function updateArticlesList(students) {
+        function initChannels(channels) {
+            for (var i = 0; i < channels.length; i++) {
+                $('#channels').append('<option value="' + channels[i].Description + '">' + channels[i].Description + '</option>');
+            }
+        }
+        function getArticles() {
+            var selectedChannel = $('#channels').val();
+            var selectedSort = $(".sort-by:checked").val();
+            var requestParams = {
+                url: "http://localhost:54733/api/Articles/?selectedChannel=" + selectedChannel + "&selectedSort=" + selectedSort,
+                type: 'GET'
+            };
+            $.ajax(requestParams)
+                .done((res) => {
+                    updateArticlesTable(res);
+                })
+                .fail((jqXhr, textStatus, errorThrown) => {
+                    showAlert('danger', errorThrown);
+                });
+        }
+        function updateArticlesTable(articles) {
             $('#articles-list > tbody').empty();
-            for (var index in students) {
-                var s = students[index];
-                var sRow = '<tr>'
-                    + '<td style="max-width:440px">' + ' <a href="' + s.Link + '">' + s.Link + '</a>' + '</td>'
-                    + '<td style="max-width:440px">' + s.Title + '</td>'
-                    + '<td style="max-width:440px">' + s.Description + '</td>'
-                    + '<td style="max-width:440px">' + s.PubDate + '</td>'
+            for (var index in articles) {
+                var article = articles[index];
+                var row = '<tr>'
+                    + '<td style="max-width:440px">' + ' <a href="' + article.Link + '">' + article.Link + '</a>' + '</td>'
+                    + '<td style="max-width:440px">' + article.Title + '</td>'
+                    + '<td style="max-width:440px">' + article.Description + '</td>'
+                    + '<td style="max-width:440px">' + article.PubDate + '</td>'
                     + '</tr>';
-                $('#articles-list > tbody').append(sRow);
+                $('#articles-list > tbody').append(row);
             }
         }
     </script>

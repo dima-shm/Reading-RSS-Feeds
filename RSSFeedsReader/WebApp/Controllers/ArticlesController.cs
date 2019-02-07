@@ -1,25 +1,33 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
 using WebApp.Context;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
     public class ArticlesController : ApiController
     {
-        private ApplicationContext db = new ApplicationContext();
+        private ApplicationContext context = new ApplicationContext();
 
-        // GET: api/Articles
-        public IHttpActionResult GetArticles()
+        public IHttpActionResult Get([FromUri]string selectedChannel, [FromUri]int selectedSort)
         {
-            return Ok(db.Articles);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            Channel channel;
+            List<Article> articlesInChannel;
+            if (selectedChannel != "All")
             {
-                db.Dispose();
+                channel = context.Channels.First(c => c.Description == selectedChannel);
+                articlesInChannel = context.Articles.Where(a => a.ChannelId == channel.Link).ToList();
             }
-            base.Dispose(disposing);
+            else
+            {
+                articlesInChannel = context.Articles.ToList();
+            }
+            if (selectedSort == 1)
+                articlesInChannel = articlesInChannel.OrderByDescending(a => a.PubDate).ToList();
+            else if (selectedSort == 2)
+                articlesInChannel = articlesInChannel.OrderByDescending(a => a.ChannelId).ToList();
+            return Ok(articlesInChannel);
         }
     }
 }
