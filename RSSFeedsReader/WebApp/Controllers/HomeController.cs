@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace WebApp.Controllers
 {
@@ -13,17 +9,13 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult PostPage()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult AjaxPage()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
