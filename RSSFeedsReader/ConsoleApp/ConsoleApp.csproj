@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationContext.cs" />
+    <Compile Include="Helper\RssHelper.cs" />
     <Compile Include="Migrations\201902071451515_MigrateDB.cs" />
     <Compile Include="Migrations\201902071451515_MigrateDB.Designer.cs">
       <DependentUpon>201902071451515_MigrateDB.cs</DependentUpon>
