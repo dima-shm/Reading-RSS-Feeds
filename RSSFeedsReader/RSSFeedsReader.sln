@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSFeedsReader", "RSSFeedsReader\RSSFeedsReader.csproj", "{34E7BADA-B4BE-4D41-95FD-4CDB2D59C2AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{C42FE3ED-7758-4A95-9ABB-65C9753BB4BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{34E7BADA-B4BE-4D41-95FD-4CDB2D59C2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34E7BADA-B4BE-4D41-95FD-4CDB2D59C2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34E7BADA-B4BE-4D41-95FD-4CDB2D59C2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34E7BADA-B4BE-4D41-95FD-4CDB2D59C2AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42FE3ED-7758-4A95-9ABB-65C9753BB4BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42FE3ED-7758-4A95-9ABB-65C9753BB4BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42FE3ED-7758-4A95-9ABB-65C9753BB4BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42FE3ED-7758-4A95-9ABB-65C9753BB4BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
