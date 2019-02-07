@@ -18,6 +18,7 @@ namespace ConsoleApp
         private static string[] links = new string[]
         {
             "https://habr.com/ru/rss/all/all/",
+             //"https://www.interfax.by/news/feed", //this RSS service is not valid - missing initial <rss> tag
             "https://www.belstu.by/rss"
         };
 
