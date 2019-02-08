@@ -22,28 +22,28 @@ namespace WebApp.Controllers
             ArticlesViewModel model = new ArticlesViewModel
             {
                 Channels = context.Channels.ToList(),
-                Articles = context.Articles.ToList()
             };
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult PostPage(ArticlesViewModel model, [System.Web.Http.FromBody]int selectedSort)
+        public ActionResult PostPage(ArticlesViewModel model, [System.Web.Http.FromBody]string selectedChannel, [System.Web.Http.FromBody]int sortBy)
         {
             Channel channel;
-            if (model.SelectedChannel != "All")
+            if (selectedChannel != "All")
             {
-                channel = context.Channels.First(c => c.Description == model.SelectedChannel);
+                channel = context.Channels.First(c => c.Description == selectedChannel);
                 model.Articles = context.Articles.Where(a => a.ChannelId == channel.Link).ToList();
             }
             else
             {
                 model.Articles = context.Articles.ToList();
             }
-            if (selectedSort == 1)
+            if (sortBy == 1)
                 model.Articles = model.Articles.OrderByDescending(a => a.PubDate).ToList();
-            else if (selectedSort == 2)
+            else if (sortBy == 2)
                 model.Articles = model.Articles.OrderByDescending(a => a.ChannelId).ToList();
+            model.Channels = context.Channels.ToList();
             return View(model);
         }
 

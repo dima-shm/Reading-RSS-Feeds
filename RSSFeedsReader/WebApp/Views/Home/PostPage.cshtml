@@ -7,7 +7,7 @@
     <form method="post" action="/Home/PostPage">
         <div class="row">
             Источник ленты
-            <select id="SelectedChannel" class="form-control">
+            <select id="SelectedChannel" name="selectedChannel" class="form-control">
                 <option value="All">Все</option>
                 @foreach (var item in Model.Channels)
                 {
@@ -17,8 +17,8 @@
         </div>
         <br />
         <div class="row">
-            <input type="radio" class="sort-by" name="sort-by" value="1" checked="checked" /> Сортировать по дате
-            <input type="radio" class="sort-by" name="sort-by" value="2" /> Сортировать по источнику
+            <input type="radio" class="sortBy" name="sortBy" value="1" checked="checked" /> Сортировать по дате
+            <input type="radio" class="sortBy" name="sortBy" value="2" /> Сортировать по источнику
         </div>
         <br />
         <div class="row">
@@ -36,14 +36,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Articles)
+                    @if (Model.Articles != null)
                     {
-                        <tr>
-                            <td style="max-width:440px"><a href="@item.Link">@item.Link</a></td>
-                            <td style="max-width:440px">@item.Title</td>
-                            <td style="max-width:440px">@item.Description</td>
-                            <td style="max-width:440px">@item.PubDate</td>
-                        </tr>
+                        foreach (var item in Model.Articles)
+                        {
+                            <tr>
+                                <td style="max-width:440px"><a href="@item.Link">@item.Link</a></td>
+                                <td style="max-width:440px">@item.Title</td>
+                                <td style="max-width:440px">@item.Description</td>
+                                <td style="max-width:440px">@item.PubDate</td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
