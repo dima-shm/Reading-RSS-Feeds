@@ -45,6 +45,9 @@ RSS источники:
     - Получение данных AJAX-запросом
 - Реализовать пагинацию по 10 записей на странице
 
+## Результат:
+![screenshot of sample](https://github.com/dima-shm/Reading-RSS-Feeds/blob/master/Preview1.png)
+
 ## Authors
 
 * **Shumanski Dima** - [dima-shm](https://github.com/dima-shm)
