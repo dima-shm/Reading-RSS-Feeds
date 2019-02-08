@@ -8,7 +8,7 @@
         <div class="row">
             Источник ленты
             <select id="SelectedChannel" class="form-control">
-                <option>Все</option>
+                <option value="All">Все</option>
                 @foreach (var item in Model.Channels)
                 {
                     <option value="@item.Description">@item.Description</option>

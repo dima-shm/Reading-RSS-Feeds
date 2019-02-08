@@ -31,7 +31,7 @@ namespace WebApp.Controllers
         public ActionResult PostPage(ArticlesViewModel model, [System.Web.Http.FromBody]int selectedSort)
         {
             Channel channel;
-            if (model.SelectedChannel != "Все")
+            if (model.SelectedChannel != "All")
             {
                 channel = context.Channels.First(c => c.Description == model.SelectedChannel);
                 model.Articles = context.Articles.Where(a => a.ChannelId == channel.Link).ToList();

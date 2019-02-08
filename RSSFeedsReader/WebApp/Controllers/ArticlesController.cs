@@ -14,7 +14,7 @@ namespace WebApp.Controllers
         {
             Channel channel;
             List<Article> articlesInChannel;
-            if (selectedChannel != "Все")
+            if (selectedChannel != "All")
             {
                 channel = context.Channels.First(c => c.Description == selectedChannel);
                 articlesInChannel = context.Articles.Where(a => a.ChannelId == channel.Link).ToList();
