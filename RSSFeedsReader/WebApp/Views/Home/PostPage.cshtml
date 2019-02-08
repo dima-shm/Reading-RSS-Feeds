@@ -4,7 +4,7 @@
 }
 
 <div class="container">
-    <form method="post" action="/Home/GetArticles">
+    <form method="post" action="/Home/PostPage">
         <div class="row">
             Источник ленты
             <select id="SelectedChannel" class="form-control">
@@ -35,46 +35,18 @@
                         <th>Дата публикации</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    @foreach (var item in Model.Articles)
+                    {
+                        <tr>
+                            <td style="max-width:440px"><a href="@item.Link">@item.Link</a></td>
+                            <td style="max-width:440px">@item.Title</td>
+                            <td style="max-width:440px">@item.Description</td>
+                            <td style="max-width:440px">@item.PubDate</td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </form>
 </div>
-
-@section scripts{
-    <script type="text/javascript">
-        $(function () {
-            $('#get-articles').bind('click', function () {
-                getArticles();
-            });
-        });
-        function getArticles() {
-            var selectedChannel = $('#channels').val();
-            var selectedSort = $(".sort-by:checked").val();
-            var requestParams = {
-                url: "http://localhost:54733/api/Articles/?selectedChannel=" + selectedChannel + "&selectedSort=" + selectedSort,
-                type: 'GET'
-            };
-            $.ajax(requestParams)
-                .done((res) => {
-                    updateArticlesTable(res);
-                })
-                .fail((jqXhr, textStatus, errorThrown) => {
-                    showAlert('danger', errorThrown);
-                });
-        }
-        function updateArticlesTable(articles) {
-            $('#articles-list > tbody').empty();
-            for (var index in articles) {
-                var article = articles[index];
-                var row = '<tr>'
-                    + '<td style="max-width:440px">' + ' <a href="' + article.Link + '">' + article.Link + '</a>' + '</td>'
-                    + '<td style="max-width:440px">' + article.Title + '</td>'
-                    + '<td style="max-width:440px">' + article.Description + '</td>'
-                    + '<td style="max-width:440px">' + article.PubDate + '</td>'
-                    + '</tr>';
-                $('#articles-list > tbody').append(row);
-            }
-        }
-    </script>
-}
