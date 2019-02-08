@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using WebApp.Context;
 using WebApp.Models;
@@ -29,21 +32,12 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult PostPage(ArticlesViewModel model, [System.Web.Http.FromBody]string selectedChannel, [System.Web.Http.FromBody]int sortBy)
         {
-            Channel channel;
-            if (selectedChannel != "All")
-            {
-                channel = context.Channels.First(c => c.Description == selectedChannel);
-                model.Articles = context.Articles.Where(a => a.ChannelId == channel.Link).ToList();
-            }
-            else
-            {
-                model.Articles = context.Articles.ToList();
-            }
-            if (sortBy == 1)
-                model.Articles = model.Articles.OrderByDescending(a => a.PubDate).ToList();
-            else if (sortBy == 2)
-                model.Articles = model.Articles.OrderByDescending(a => a.ChannelId).ToList();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:54733/api/Articles/?selectedChannel=" + selectedChannel + "&selectedSort=" + sortBy);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            List<Article> articles = JsonConvert.DeserializeObject<Article[]>(responseString).ToList();
             model.Channels = context.Channels.ToList();
+            model.Articles = articles;
             return View(model);
         }
 
