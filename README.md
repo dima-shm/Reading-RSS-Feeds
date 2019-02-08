@@ -46,6 +46,8 @@ RSS источники:
 - Реализовать пагинацию по 10 записей на странице
 
 ## Результат:
+![screenshot of sample](https://github.com/dima-shm/Reading-RSS-Feeds/blob/master/Preview2.jpg)
+
 ![screenshot of sample](https://github.com/dima-shm/Reading-RSS-Feeds/blob/master/Preview1.jpg)
 
 ## Authors
