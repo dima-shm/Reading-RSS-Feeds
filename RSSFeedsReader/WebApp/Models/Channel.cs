@@ -2,7 +2,7 @@
 
 namespace WebApp.Models
 {
-    class Channel
+    public class Channel
     {
         [Key]
         public string Link { get; set; }
